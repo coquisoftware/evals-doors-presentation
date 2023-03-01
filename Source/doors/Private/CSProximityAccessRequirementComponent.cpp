@@ -2,7 +2,8 @@
 
 
 #include "CSProximityAccessRequirementComponent.h"
-#include "Engine/TriggerBox.h"
+
+#include "CSTriggerBox.h"
 
 
 // Sets default values for this component's properties
@@ -22,6 +23,14 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	TArray<AActor*> ChildActors;
+	if(AActor* DoorOwner = GetOwner())
+	{
+		DoorOwner->GetAttachedActors(ChildActors);
+	}
+
+	TriggerVolume = Cast<ACSTriggerBox>(ChildActors[0]);
+	
 	if(TriggerVolume != nullptr)
 	{
 		TriggerVolume->OnActorBeginOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorBeginOverlap);

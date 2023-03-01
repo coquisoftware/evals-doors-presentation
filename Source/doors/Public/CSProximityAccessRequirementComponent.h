@@ -7,7 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "CSProximityAccessRequirementComponent.generated.h"
 
-class ATriggerBox;
+class ACSTriggerBox;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class DOORS_API UCSProximityAccessRequirementComponent : public UCSAccessRequirementComponent
@@ -16,8 +16,8 @@ class DOORS_API UCSProximityAccessRequirementComponent : public UCSAccessRequire
 
 public:
 
-	UPROPERTY(Transient, EditInstanceOnly)
-	ATriggerBox* TriggerVolume;
+	UPROPERTY(Transient)
+	ACSTriggerBox* TriggerVolume;
 	
 public:
 	// Sets default values for this component's properties
