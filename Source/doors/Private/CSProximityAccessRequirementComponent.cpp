@@ -2,15 +2,13 @@
 
 
 #include "CSProximityAccessRequirementComponent.h"
-
-#include "Engine/TriggerVolume.h"
+#include "Engine/TriggerBox.h"
 
 
 // Sets default values for this component's properties
 UCSProximityAccessRequirementComponent::UCSProximityAccessRequirementComponent()
 {
-	TriggerVolume->OnActorBeginOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorBeginOverlap);
-	TriggerVolume->OnActorEndOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorEndOverlap);
+	
 }
 
 bool UCSProximityAccessRequirementComponent::RequirementHasBeenMet() const
@@ -24,7 +22,11 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	if(TriggerVolume != nullptr)
+	{
+		TriggerVolume->OnActorBeginOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorBeginOverlap);
+		TriggerVolume->OnActorEndOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorEndOverlap);
+	}
 	
 }
 

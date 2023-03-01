@@ -31,6 +31,11 @@ bool ACSDoor::AreAllAreAccessRequirementsMet() const
 	
 }
 
+FText ACSDoor::GetDoorLabel() const
+{
+	return DoorLabel;
+}
+
 // Called when the game starts or when spawned
 void ACSDoor::BeginPlay()
 {

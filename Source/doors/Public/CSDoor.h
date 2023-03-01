@@ -13,15 +13,18 @@ class DOORS_API ACSDoor : public AActor
 
 public:
 
-	UPROPERTY(EditInstanceOnly)
+	UPROPERTY(EditAnywhere)
 	FText DoorLabel;
 	
 public:
 	// Sets default values for this actor's properties
 	ACSDoor();
 
-	
+	UFUNCTION(BlueprintPure)
 	bool AreAllAreAccessRequirementsMet() const;
+
+	UFUNCTION(BlueprintPure)
+	FText GetDoorLabel() const;
 
 protected:
 	// Called when the game starts or when spawned
