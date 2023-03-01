@@ -9,6 +9,15 @@
 
 class UCSAccessRequirementComponent;
 
+
+// UENUM(BlueprintType)
+// enum EDoorUnlockBehavior : uint8
+// {
+// 	AutoOpen,
+// 	OpenUponInteract	
+// };
+
+
 UCLASS()
 class DOORS_API ACSDoor : public AActor, public ICSInteractableInterface
 {

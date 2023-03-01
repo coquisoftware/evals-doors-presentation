@@ -3,12 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CSAccessRequirementComponent.h"
+#include "CSProximityAccessRequirementComponent.h"
 #include "CSInteractAccessRequirementComponent.generated.h"
 
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class DOORS_API UCSInteractAccessRequirementComponent : public UCSAccessRequirementComponent
+class DOORS_API UCSInteractAccessRequirementComponent : public UCSProximityAccessRequirementComponent
 {
 	GENERATED_BODY()
 
@@ -16,9 +16,22 @@ public:
 	// Sets default values for this component's properties
 	UCSInteractAccessRequirementComponent();
 
+	virtual bool HasRequirementBeenMet() const override;
+
+
+	UFUNCTION(BlueprintCallable)
+	void SetInteractStatus(bool bStatus);
+	
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+private:
+
+	UPROPERTY()
+	bool bHasBeenInteractedWith;
+
 
 };
+

@@ -19,7 +19,7 @@ public:
 	UCSProximityAccessRequirementComponent();
 
 	UFUNCTION(BlueprintPure)
-	virtual bool HasRequirementBeenMet() const;
+	virtual bool HasRequirementBeenMet() const override;
 
 
 protected:
@@ -31,6 +31,9 @@ protected:
 
 	UFUNCTION()
 	void OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
+	UFUNCTION()
+	void CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus);
 
 public:
 

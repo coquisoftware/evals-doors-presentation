@@ -10,6 +10,7 @@
 UCSProximityAccessRequirementComponent::UCSProximityAccessRequirementComponent()
 {
 	bIsCharacterInTriggerVolume = false;
+	TriggerVolume = nullptr;
 }
 
 bool UCSProximityAccessRequirementComponent::HasRequirementBeenMet() const
@@ -27,9 +28,12 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 	if(AActor* DoorOwner = GetOwner())
 	{
 		DoorOwner->GetAttachedActors(ChildActors);
-	}
 
-	TriggerVolume = Cast<ACSTriggerBox>(ChildActors[0]);
+		if(!ChildActors.IsEmpty())
+		{
+			TriggerVolume = Cast<ACSTriggerBox>(ChildActors[0]);
+		}
+	}
 	
 	if(TriggerVolume != nullptr)
 	{
@@ -42,15 +46,24 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 void UCSProximityAccessRequirementComponent::OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	// @TODO Check if OtherActor is PlayerCharacter
+	CheckAndNotifyAccessRequirementStatusChange(true);
 	bIsCharacterInTriggerVolume = true;
-	OnAccessRequirementStatusChange.Broadcast(bIsCharacterInTriggerVolume);
+	
 }
 
 void UCSProximityAccessRequirementComponent::OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	// @TODO Check if OtherActor is PlayerCharacter
+	CheckAndNotifyAccessRequirementStatusChange(false);
 	bIsCharacterInTriggerVolume = false;
-	OnAccessRequirementStatusChange.Broadcast(bIsCharacterInTriggerVolume);
+}
+
+void UCSProximityAccessRequirementComponent::CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus)
+{
+	if(bNewStatus != HasRequirementBeenMet())
+	{
+		OnAccessRequirementStatusChange.Broadcast(bNewStatus);
+	}
 }
 
 
