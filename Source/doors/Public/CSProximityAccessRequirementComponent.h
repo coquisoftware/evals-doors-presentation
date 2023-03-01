@@ -31,7 +31,10 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
 	void OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
+	UFUNCTION()
 	void OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 };
