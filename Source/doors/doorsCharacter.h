@@ -73,5 +73,9 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	/** Returns InteractionComponent **/
+	FORCEINLINE class UCSCharacterInteractionComponent* GetInteractionComponent() const { return InteractionComp; }
+	/** Returns Inventory subobject **/
+	FORCEINLINE class UCSInventoryComponent* GetInventory() const { return Inventory; }
 };
 
