@@ -54,12 +54,4 @@ void UCSProximityAccessRequirementComponent::OnActorEndOverlap(AActor* Overlappe
 	bIsCharacterInTriggerVolume = false;
 }
 
-void UCSProximityAccessRequirementComponent::CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus)
-{
-	if(bNewStatus != HasRequirementBeenMet())
-	{
-		OnAccessRequirementStatusChange.Broadcast(bNewStatus);
-	}
-}
-
 

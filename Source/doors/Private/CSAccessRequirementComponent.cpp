@@ -13,6 +13,13 @@ UCSAccessRequirementComponent::UCSAccessRequirementComponent()
 }
 
 
+void UCSAccessRequirementComponent::CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus)
+{
+	if(bNewStatus != HasRequirementBeenMet())
+	{
+		OnAccessRequirementStatusChange.Broadcast(bNewStatus);
+	}
+}
 
 // Called when the game starts
 void UCSAccessRequirementComponent::BeginPlay()

@@ -19,6 +19,7 @@ public:
 
 	virtual bool HasRequirementBeenMet() const PURE_VIRTUAL(, return false;);
 
+	void CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus);
 
 protected:
 	// Called when the game starts

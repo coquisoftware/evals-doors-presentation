@@ -35,8 +35,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	FText GetDoorLabel() const;
 
-	UFUNCTION(BlueprintPure)
-	ACSTriggerBox* GetTriggerBoxVolume() const;
+	UFUNCTION(BlueprintCallable)
+	ACSTriggerBox* GetTriggerBoxVolume();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void Open();

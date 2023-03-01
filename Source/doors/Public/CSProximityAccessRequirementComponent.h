@@ -32,9 +32,6 @@ protected:
 	UFUNCTION()
 	void OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
-	UFUNCTION()
-	void CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus);
-
 public:
 
 	UPROPERTY(Transient)

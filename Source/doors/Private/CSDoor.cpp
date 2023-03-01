@@ -35,8 +35,19 @@ FText ACSDoor::GetDoorLabel() const
 	return DoorLabel;
 }
 
-ACSTriggerBox* ACSDoor::GetTriggerBoxVolume() const
+ACSTriggerBox* ACSDoor::GetTriggerBoxVolume()
 {
+	if(TriggerBoxVolume == nullptr)
+	{
+		TArray<AActor*> ChildActors;
+		GetAttachedActors(ChildActors);
+
+		if(!ChildActors.IsEmpty())
+		{
+			TriggerBoxVolume = Cast<ACSTriggerBox>(ChildActors[0]);
+		}
+	}
+
 	return TriggerBoxVolume;
 }
 
@@ -50,14 +61,6 @@ void ACSDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TArray<AActor*> ChildActors;
-	GetAttachedActors(ChildActors);
-
-	if(!ChildActors.IsEmpty())
-	{
-		TriggerBoxVolume = Cast<ACSTriggerBox>(ChildActors[0]);
-	}
-	
 	GetComponents(CachedAccessRequirementComponentsList);
 	
 	for(UCSAccessRequirementComponent* AccessRequirementComponent : CachedAccessRequirementComponentsList)
