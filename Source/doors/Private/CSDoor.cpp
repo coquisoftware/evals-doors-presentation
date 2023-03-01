@@ -3,12 +3,32 @@
 
 #include "doors/Public/CSDoor.h"
 
+#include "CSAccessRequirementComponent.h"
+
 
 // Sets default values
 ACSDoor::ACSDoor()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+}
+
+bool ACSDoor::AreAllAreAccessRequirementsMet() const
+{
+	bool bResult = true;
+
+	TArray<UCSAccessRequirementComponent*> AccessRequirementComponentsList;
+	GetComponents(AccessRequirementComponentsList);
+
+	for(const UCSAccessRequirementComponent* AccessRequirementComponent : AccessRequirementComponentsList)
+	{
+		if(!AccessRequirementComponent->RequirementHasBeenMet())
+		{
+			bResult = false;
+			break;
+		}
+	}
+
+	return bResult;
+	
 }
 
 // Called when the game starts or when spawned
@@ -18,9 +38,4 @@ void ACSDoor::BeginPlay()
 	
 }
 
-// Called every frame
-void ACSDoor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
 
