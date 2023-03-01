@@ -3,13 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CSInteractableInterface.h"
 #include "GameFramework/Actor.h"
 #include "CSDoor.generated.h"
 
 class UCSAccessRequirementComponent;
 
 UCLASS()
-class DOORS_API ACSDoor : public AActor
+class DOORS_API ACSDoor : public AActor, public ICSInteractableInterface
 {
 	GENERATED_BODY()
 
@@ -29,6 +30,9 @@ public:
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void Close();
+
+	UFUNCTION()
+	void Interact(APawn* InstigatorPawn);
 	
 protected:
 	// Called when the game starts or when spawned

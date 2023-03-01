@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "doorsCharacter.h"
+
+#include "CSCharacterInteractionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
@@ -49,6 +51,9 @@ AdoorsCharacter::AdoorsCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	// Interaction component
+	InteractionComp = CreateDefaultSubobject<UCSCharacterInteractionComponent>(TEXT("InteractionComp"));
 }
 
 void AdoorsCharacter::BeginPlay()
@@ -86,6 +91,8 @@ void AdoorsCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 
 	}
 
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AdoorsCharacter::Interact);
+
 }
 
 void AdoorsCharacter::Move(const FInputActionValue& Value)
@@ -121,6 +128,14 @@ void AdoorsCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void AdoorsCharacter::Interact()
+{
+	if(InteractionComp != nullptr)
+	{
+		InteractionComp->Interact();
 	}
 }
 

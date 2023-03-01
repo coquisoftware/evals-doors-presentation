@@ -34,6 +34,11 @@ FText ACSDoor::GetDoorLabel() const
 	return DoorLabel;
 }
 
+void ACSDoor::Interact(APawn* InstigatorPawn)
+{
+	
+}
+
 // Called when the game starts or when spawned
 void ACSDoor::BeginPlay()
 {
