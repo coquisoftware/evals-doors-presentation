@@ -9,18 +9,16 @@
 // Sets default values
 ACSDoor::ACSDoor()
 {
+	bIsDoorOpen = false;
 }
 
 bool ACSDoor::AreAllAreAccessRequirementsMet() const
 {
 	bool bResult = true;
 
-	TArray<UCSAccessRequirementComponent*> AccessRequirementComponentsList;
-	GetComponents(AccessRequirementComponentsList);
-
-	for(const UCSAccessRequirementComponent* AccessRequirementComponent : AccessRequirementComponentsList)
+	for(const UCSAccessRequirementComponent* AccessRequirementComponent : CachedAccessRequirementComponentsList)
 	{
-		if(!AccessRequirementComponent->RequirementHasBeenMet())
+		if(!AccessRequirementComponent->HasRequirementBeenMet())
 		{
 			bResult = false;
 			break;
@@ -40,7 +38,30 @@ FText ACSDoor::GetDoorLabel() const
 void ACSDoor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetComponents(CachedAccessRequirementComponentsList);
 	
+	for(UCSAccessRequirementComponent* AccessRequirementComponent : CachedAccessRequirementComponentsList)
+	{
+		AccessRequirementComponent->OnAccessRequirementStatusChange.AddDynamic(this, &ACSDoor::OnAccessRequirementChange);
+	}
+
+}
+
+void ACSDoor::OnAccessRequirementChange(bool bStatus)
+{
+	const bool bAllAccessRequirementsMet = AreAllAreAccessRequirementsMet();
+	if(!bIsDoorOpen && bAllAccessRequirementsMet)
+	{
+		Open();
+		bIsDoorOpen = true;
+	}
+	else if(bIsDoorOpen && !bAllAccessRequirementsMet)
+	{
+		Close();
+		bIsDoorOpen = false;
+	}
+
 }
 
 

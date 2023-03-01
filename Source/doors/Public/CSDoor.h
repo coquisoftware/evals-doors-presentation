@@ -6,15 +6,13 @@
 #include "GameFramework/Actor.h"
 #include "CSDoor.generated.h"
 
+class UCSAccessRequirementComponent;
+
 UCLASS()
 class DOORS_API ACSDoor : public AActor
 {
 	GENERATED_BODY()
 
-public:
-
-	UPROPERTY(EditAnywhere)
-	FText DoorLabel;
 	
 public:
 	// Sets default values for this actor's properties
@@ -26,7 +24,30 @@ public:
 	UFUNCTION(BlueprintPure)
 	FText GetDoorLabel() const;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void Open();
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void Close();
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	void OnAccessRequirementChange(bool bStatus);
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	FText DoorLabel;
+	
+protected:
+	
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsDoorOpen;
+
+private:
+
+	TArray<UCSAccessRequirementComponent*> CachedAccessRequirementComponentsList;
+	
 };

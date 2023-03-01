@@ -15,16 +15,11 @@ class DOORS_API UCSProximityAccessRequirementComponent : public UCSAccessRequire
 	GENERATED_BODY()
 
 public:
-
-	UPROPERTY(Transient)
-	ACSTriggerBox* TriggerVolume;
-	
-public:
 	// Sets default values for this component's properties
 	UCSProximityAccessRequirementComponent();
 
 	UFUNCTION(BlueprintPure)
-	virtual bool RequirementHasBeenMet() const;
+	virtual bool HasRequirementBeenMet() const;
 
 
 protected:
@@ -36,5 +31,16 @@ protected:
 
 	UFUNCTION()
 	void OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
+public:
+
+	UPROPERTY(Transient)
+	ACSTriggerBox* TriggerVolume;
+
+private:
+
+	UPROPERTY()
+	bool bIsCharacterInTriggerVolume;
+	
 
 };

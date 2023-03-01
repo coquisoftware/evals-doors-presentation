@@ -9,12 +9,12 @@
 // Sets default values for this component's properties
 UCSProximityAccessRequirementComponent::UCSProximityAccessRequirementComponent()
 {
-	
+	bIsCharacterInTriggerVolume = false;
 }
 
-bool UCSProximityAccessRequirementComponent::RequirementHasBeenMet() const
+bool UCSProximityAccessRequirementComponent::HasRequirementBeenMet() const
 {
-	return Super::RequirementHasBeenMet();
+	return bIsCharacterInTriggerVolume;
 }
 
 
@@ -41,43 +41,16 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 
 void UCSProximityAccessRequirementComponent::OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	// @TODO
-	for(FName tag : OverlappedActor->Tags)
-	{
-		if(tag.IsNone())
-		{
-			break;
-		}
-	}
-	
-	for(FName tag : OtherActor->Tags)
-	{
-		if(tag.IsNone())
-		{
-			break;
-		}
-	}
-	
+	// @TODO Check if OtherActor is PlayerCharacter
+	bIsCharacterInTriggerVolume = true;
+	OnAccessRequirementStatusChange.Broadcast(bIsCharacterInTriggerVolume);
 }
 
 void UCSProximityAccessRequirementComponent::OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	// @TODO
-	for(FName tag : OverlappedActor->Tags)
-	{
-		if(tag.IsNone())
-		{
-			break;
-		}
-	}
-	
-	for(FName tag : OtherActor->Tags)
-	{
-		if(tag.IsNone())
-		{
-			break;
-		}
-	}
+	// @TODO Check if OtherActor is PlayerCharacter
+	bIsCharacterInTriggerVolume = false;
+	OnAccessRequirementStatusChange.Broadcast(bIsCharacterInTriggerVolume);
 }
 
 
