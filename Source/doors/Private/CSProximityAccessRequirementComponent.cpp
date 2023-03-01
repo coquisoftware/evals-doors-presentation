@@ -3,6 +3,7 @@
 
 #include "CSProximityAccessRequirementComponent.h"
 
+#include "CSDoor.h"
 #include "CSTriggerBox.h"
 
 
@@ -25,20 +26,15 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 	Super::BeginPlay();
 
 	TArray<AActor*> ChildActors;
-	if(AActor* DoorOwner = GetOwner())
+	if(ACSDoor* DoorOwner = Cast<ACSDoor>(GetOwner()))
 	{
-		DoorOwner->GetAttachedActors(ChildActors);
-
-		if(!ChildActors.IsEmpty())
+		TriggerVolume = DoorOwner->GetTriggerBoxVolume();
+		
+		if(TriggerVolume != nullptr)
 		{
-			TriggerVolume = Cast<ACSTriggerBox>(ChildActors[0]);
+			TriggerVolume->OnActorBeginOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorBeginOverlap);
+			TriggerVolume->OnActorEndOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorEndOverlap);
 		}
-	}
-	
-	if(TriggerVolume != nullptr)
-	{
-		TriggerVolume->OnActorBeginOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorBeginOverlap);
-		TriggerVolume->OnActorEndOverlap.AddDynamic(this, &UCSProximityAccessRequirementComponent::OnActorEndOverlap);
 	}
 	
 }

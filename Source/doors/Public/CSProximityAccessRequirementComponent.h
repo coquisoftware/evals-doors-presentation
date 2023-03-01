@@ -40,6 +40,8 @@ public:
 	UPROPERTY(Transient)
 	ACSTriggerBox* TriggerVolume;
 
+	
+
 private:
 
 	UPROPERTY()

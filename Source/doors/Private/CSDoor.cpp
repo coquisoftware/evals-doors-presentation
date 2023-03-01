@@ -4,6 +4,7 @@
 #include "doors/Public/CSDoor.h"
 
 #include "CSAccessRequirementComponent.h"
+#include "CSTriggerBox.h"
 
 
 // Sets default values
@@ -34,6 +35,11 @@ FText ACSDoor::GetDoorLabel() const
 	return DoorLabel;
 }
 
+ACSTriggerBox* ACSDoor::GetTriggerBoxVolume() const
+{
+	return TriggerBoxVolume;
+}
+
 void ACSDoor::Interact(APawn* InstigatorPawn)
 {
 	
@@ -44,11 +50,19 @@ void ACSDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	TArray<AActor*> ChildActors;
+	GetAttachedActors(ChildActors);
+
+	if(!ChildActors.IsEmpty())
+	{
+		TriggerBoxVolume = Cast<ACSTriggerBox>(ChildActors[0]);
+	}
+	
 	GetComponents(CachedAccessRequirementComponentsList);
 	
 	for(UCSAccessRequirementComponent* AccessRequirementComponent : CachedAccessRequirementComponentsList)
 	{
-		AccessRequirementComponent->OnAccessRequirementStatusChange.AddDynamic(this, &ACSDoor::OnAccessRequirementChange);
+		AccessRequirementComponent->OnAccessRequirementStatusChange.AddDynamic(this, &ACSDoor::OnAccessRequirementChange)
 	}
 
 }
@@ -69,4 +83,8 @@ void ACSDoor::OnAccessRequirementChange(bool bStatus)
 
 }
 
+void ACSDoor::OnProximityStatusChange(bool bStatus)
+{
+	
+}
 

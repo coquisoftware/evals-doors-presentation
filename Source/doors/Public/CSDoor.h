@@ -8,6 +8,7 @@
 #include "CSDoor.generated.h"
 
 class UCSAccessRequirementComponent;
+class ACSTriggerBox;
 
 
 // UENUM(BlueprintType)
@@ -34,6 +35,9 @@ public:
 	UFUNCTION(BlueprintPure)
 	FText GetDoorLabel() const;
 
+	UFUNCTION(BlueprintPure)
+	ACSTriggerBox* GetTriggerBoxVolume() const;
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void Open();
 	
@@ -50,6 +54,9 @@ protected:
 	UFUNCTION()
 	void OnAccessRequirementChange(bool bStatus);
 
+	UFUNCTION()
+	void OnProximityStatusChange(bool bStatus);
+
 public:
 
 	UPROPERTY(EditAnywhere)
@@ -60,8 +67,13 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsDoorOpen;
 
+	UPROPERTY(BlueprintReadOnly)
+	ACSTriggerBox* TriggerBoxVolume; 
+
 private:
 
 	TArray<UCSAccessRequirementComponent*> CachedAccessRequirementComponentsList;
 	
 };
+
+
