@@ -4,7 +4,7 @@
 #include "CSProximityAccessRequirementComponent.h"
 
 
-#include "CSDoor.h"
+#include "CSInteractableInterface.h"
 #include "CSTriggerBox.h"
 
 
@@ -27,9 +27,10 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 	Super::BeginPlay();
 
 	TArray<AActor*> ChildActors;
-	if(ACSDoor* DoorOwner = Cast<ACSDoor>(GetOwner()))
+	check(GetOwner()->Implements<UCSInteractableInterface>())
+	if(ICSInteractableInterface* InteractableOwner = Cast<ICSInteractableInterface>(GetOwner()))
 	{
-		TriggerVolume = DoorOwner->GetTriggerBoxVolume();
+		TriggerVolume = InteractableOwner->GetTriggerBoxVolume();
 		
 		if(TriggerVolume != nullptr)
 		{
