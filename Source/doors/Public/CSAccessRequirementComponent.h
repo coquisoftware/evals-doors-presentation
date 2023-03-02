@@ -17,7 +17,9 @@ public:
 	// Sets default values for this component's properties
 	UCSAccessRequirementComponent();
 
-	virtual bool HasRequirementBeenMet() const PURE_VIRTUAL(, return false;);
+	UFUNCTION(BlueprintNativeEvent)
+	bool HasRequirementBeenMet() const;
+	virtual bool HasRequirementBeenMet_Implementation() const PURE_VIRTUAL(, return false;);
 
 	void CheckAndNotifyAccessRequirementStatusChange();
 

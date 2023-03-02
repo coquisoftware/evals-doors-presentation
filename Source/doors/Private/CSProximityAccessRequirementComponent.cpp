@@ -15,7 +15,7 @@ UCSProximityAccessRequirementComponent::UCSProximityAccessRequirementComponent()
 	TriggerVolume = nullptr;
 }
 
-bool UCSProximityAccessRequirementComponent::HasRequirementBeenMet() const
+bool UCSProximityAccessRequirementComponent::HasRequirementBeenMet_Implementation() const
 {
 	return bIsCharacterInTriggerVolume;
 }

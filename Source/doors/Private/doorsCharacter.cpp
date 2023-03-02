@@ -80,7 +80,7 @@ void AdoorsCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent)) {
 		
 		//Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AdoorsCharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		//Moving
@@ -136,6 +136,17 @@ void AdoorsCharacter::Interact()
 	if(InteractionComp != nullptr)
 	{
 		InteractionComp->Interact();
+	}
+}
+
+void AdoorsCharacter::Jump()
+{
+	const bool bPriorJumpState = bPressedJump; 
+	Super::Jump();
+
+	if(bPriorJumpState == false)
+	{
+		OnPlayerJump.Broadcast();
 	}
 }
 

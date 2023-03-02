@@ -18,8 +18,7 @@ public:
 	// Sets default values for this component's properties
 	UCSProximityAccessRequirementComponent();
 
-	UFUNCTION(BlueprintPure)
-	virtual bool HasRequirementBeenMet() const override;
+	virtual bool HasRequirementBeenMet_Implementation() const override;
 
 
 protected:

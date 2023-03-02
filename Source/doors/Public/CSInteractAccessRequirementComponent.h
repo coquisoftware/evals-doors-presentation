@@ -16,9 +16,8 @@ public:
 	// Sets default values for this component's properties
 	UCSInteractAccessRequirementComponent();
 
-	virtual bool HasRequirementBeenMet() const override;
-
-
+	virtual bool HasRequirementBeenMet_Implementation() const override;
+	
 	UFUNCTION(BlueprintCallable)
 	void SetInteractStatus(bool bStatus);
 

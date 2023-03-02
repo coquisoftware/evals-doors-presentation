@@ -46,6 +46,12 @@ class AdoorsCharacter : public ACharacter
 	class UInputAction* LookAction;
 
 public:
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnJumpEvent);
+	UPROPERTY(BlueprintAssignable)
+	FOnJumpEvent OnPlayerJump;
+
+public:
 	AdoorsCharacter();
 	
 
@@ -59,6 +65,9 @@ protected:
 
 	/** Called for interaction input */
 	void Interact();
+
+	/** Called for jumping input */
+	virtual void Jump() override;
 			
 
 protected:

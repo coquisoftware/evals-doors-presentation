@@ -21,7 +21,7 @@ void UCSInteractAccessRequirementComponent::BeginPlay()
 
 }
 
-bool UCSInteractAccessRequirementComponent::HasRequirementBeenMet() const
+bool UCSInteractAccessRequirementComponent::HasRequirementBeenMet_Implementation() const
 {
 	return Super::HasRequirementBeenMet() && bHasBeenInteractedWith;
 }
