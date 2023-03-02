@@ -21,6 +21,7 @@ public:
 	bool HasRequirementBeenMet() const;
 	virtual bool HasRequirementBeenMet_Implementation() const PURE_VIRTUAL(, return false;);
 
+	UFUNCTION(BlueprintCallable)
 	void CheckAndNotifyAccessRequirementStatusChange();
 
 protected:

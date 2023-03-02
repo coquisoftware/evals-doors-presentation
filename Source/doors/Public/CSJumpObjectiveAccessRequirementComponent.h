@@ -23,6 +23,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	// Callback invoked when player jumps
+	UFUNCTION()
 	void OnPlayerJump();
 
 public:

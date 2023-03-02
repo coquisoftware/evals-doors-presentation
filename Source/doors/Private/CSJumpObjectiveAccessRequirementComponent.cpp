@@ -27,18 +27,18 @@ void UCSJumpObjectiveAccessRequirementComponent::BeginPlay()
 
 	// ...
 
-	AdoorsCharacter* DoorsCharacter = Cast<AdoorsCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if(AdoorsCharacter* DoorsCharacter = Cast<AdoorsCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter()))
+	{
+		DoorsCharacter->OnPlayerJump.AddDynamic(this, &UCSJumpObjectiveAccessRequirementComponent::OnPlayerJump );
+	}
 
-	DoorsCharacter->OnPlayerJump.AddDynamic(this, &UCSJumpObjectiveAccessRequirementComponent::OnPlayerJump );
-	
-	
-	
 	
 }
 
 void UCSJumpObjectiveAccessRequirementComponent::OnPlayerJump()
 {
 	++NumPlayerJumps;
+	CheckAndNotifyAccessRequirementStatusChange();
 }
 
 
