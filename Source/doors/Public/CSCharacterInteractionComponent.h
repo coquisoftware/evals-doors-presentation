@@ -7,6 +7,7 @@
 #include "CSCharacterInteractionComponent.generated.h"
 
 
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class DOORS_API UCSCharacterInteractionComponent : public UActorComponent
 {
@@ -20,10 +21,15 @@ public:
 	void Interact();
 
 	UFUNCTION(BlueprintCallable)
-	void SetInterfacableActor(AActor* InActor);
+	void SetInstigatingActor(AActor* InActor);
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void UpdateInteractUI(bool bShow);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractableObjectDetectStatus, bool, bIsAroundInteractable);
+	UPROPERTY(BlueprintAssignable)
+	FOnInteractableObjectDetectStatus OnInteractableObjectDetectStatus;
+	
+	
+	
+	
 
 protected:
 	// Called when the game starts
