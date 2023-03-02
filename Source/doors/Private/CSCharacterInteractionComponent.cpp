@@ -38,7 +38,7 @@ void UCSCharacterInteractionComponent::Interact()
 	}
 }
 
-void UCSCharacterInteractionComponent::SetInstigatingActor(AActor* InActor)
+void UCSCharacterInteractionComponent::SetInterfacableActor(AActor* InActor)
 {
 	InterfacableActor = InActor;
 	OnInteractableObjectDetectStatus.Broadcast(InterfacableActor != nullptr);

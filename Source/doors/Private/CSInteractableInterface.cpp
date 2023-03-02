@@ -4,8 +4,4 @@
 #include "CSInteractableInterface.h"
 
 
-// Add default functionality here for any ICSInteractableInterface functions that are not pure virtual.
-void ICSInteractableInterface::Interact(AdoorsCharacter* InstigatorPawn)
-{
-	
-}
+

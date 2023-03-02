@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "CSInventoryComponent.generated.h"
 
+class ACSKeyInventoryItem;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class DOORS_API UCSInventoryComponent : public UActorComponent
@@ -15,10 +16,17 @@ class DOORS_API UCSInventoryComponent : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UCSInventoryComponent();
+	
+	void AddToInventory(ACSKeyInventoryItem* Item);
+
+	
+	
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	
+	TArray<ACSKeyInventoryItem*> InventoryItemList;
 
 };

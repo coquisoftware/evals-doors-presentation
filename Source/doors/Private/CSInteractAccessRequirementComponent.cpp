@@ -50,7 +50,7 @@ void UCSInteractAccessRequirementComponent::OnActorBeginOverlap(AActor* Overlapp
 		{
 			AActor* Door = OverlappedActor->GetAttachParentActor();
 			check(Door && Door->Implements<UCSInteractableInterface>())
-			DoorsCharInteractionComp->SetInstigatingActor(Door);
+			DoorsCharInteractionComp->SetInterfacableActor(Door);
 		}
 	}
 }
@@ -63,7 +63,7 @@ void UCSInteractAccessRequirementComponent::OnActorEndOverlap(AActor* Overlapped
 	{
 		if(UCSCharacterInteractionComponent* DoorsCharInteractionComp = DoorsChar->GetInteractionComponent())
 		{
-			DoorsCharInteractionComp->SetInstigatingActor(nullptr);
+			DoorsCharInteractionComp->SetInterfacableActor(nullptr);
 		}
 	}
 }

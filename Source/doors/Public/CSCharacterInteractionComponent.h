@@ -21,14 +21,11 @@ public:
 	void Interact();
 
 	UFUNCTION(BlueprintCallable)
-	void SetInstigatingActor(AActor* InActor);
+	void SetInterfacableActor(AActor* InActor);
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractableObjectDetectStatus, bool, bIsAroundInteractable);
 	UPROPERTY(BlueprintAssignable)
 	FOnInteractableObjectDetectStatus OnInteractableObjectDetectStatus;
-	
-	
-	
 	
 
 protected:
