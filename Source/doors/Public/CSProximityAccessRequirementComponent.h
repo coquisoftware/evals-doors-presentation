@@ -27,10 +27,10 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	void OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	virtual void OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 	UFUNCTION()
-	void OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	virtual void OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 public:
 

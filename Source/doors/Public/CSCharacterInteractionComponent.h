@@ -16,7 +16,14 @@ public:
 	// Sets default values for this component's properties
 	UCSCharacterInteractionComponent();
 
+	UFUNCTION()
 	void Interact();
+
+	UFUNCTION(BlueprintCallable)
+	void SetInterfacableActor(AActor* InActor);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateInteractUI(bool bShow);
 
 protected:
 	// Called when the game starts

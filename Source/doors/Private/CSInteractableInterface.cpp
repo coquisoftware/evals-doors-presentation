@@ -5,7 +5,7 @@
 
 
 // Add default functionality here for any ICSInteractableInterface functions that are not pure virtual.
-void ICSInteractableInterface::Interact(APawn* InstigatorPawn)
+void ICSInteractableInterface::Interact(AdoorsCharacter* InstigatorPawn)
 {
 	
 }

@@ -3,6 +3,7 @@
 
 #include "CSProximityAccessRequirementComponent.h"
 
+
 #include "CSDoor.h"
 #include "CSTriggerBox.h"
 
@@ -41,14 +42,12 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 
 void UCSProximityAccessRequirementComponent::OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	// @TODO Check if OtherActor is PlayerCharacter
 	bIsCharacterInTriggerVolume = true;
 	CheckAndNotifyAccessRequirementStatusChange();
 }
 
 void UCSProximityAccessRequirementComponent::OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	// @TODO Check if OtherActor is PlayerCharacter
 	bIsCharacterInTriggerVolume = false;
 	CheckAndNotifyAccessRequirementStatusChange();
 }

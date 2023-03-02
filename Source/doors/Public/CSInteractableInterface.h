@@ -25,5 +25,5 @@ class DOORS_API ICSInteractableInterface
 public:
 
 	UFUNCTION()
-	void Interact(AdoorsCharacter* InstigatorPawn);
+	virtual void Interact(AdoorsCharacter* InstigatorPawn);
 };

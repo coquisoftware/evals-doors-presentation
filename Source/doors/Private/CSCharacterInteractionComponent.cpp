@@ -38,6 +38,12 @@ void UCSCharacterInteractionComponent::Interact()
 	}
 }
 
+void UCSCharacterInteractionComponent::SetInterfacableActor(AActor* InActor)
+{
+	InterfacableActor = InActor;
+	UpdateInteractUI(InterfacableActor != nullptr); // @jasonv #need to find a better place for this to update UI
+}
+
 
 
 
