@@ -23,6 +23,7 @@ public:
 	void AddToInventory(ACSKeyInventoryItem* Item);
 
 	// Delegate for notifying item added to the ist
+	UPROPERTY()
 	FOnInventoryListUpdate OnInventoryItemAdded;
 
 

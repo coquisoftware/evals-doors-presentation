@@ -23,6 +23,7 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
 	void OnInventoryItemAdd(ACSKeyInventoryItem* Item);
 
 private:

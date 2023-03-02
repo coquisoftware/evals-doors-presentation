@@ -3,6 +3,7 @@
 #include "doorsCharacter.h"
 
 #include "CSCharacterInteractionComponent.h"
+#include "CSInventoryComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
@@ -54,6 +55,7 @@ AdoorsCharacter::AdoorsCharacter()
 
 	// Interaction component
 	InteractionComp = CreateDefaultSubobject<UCSCharacterInteractionComponent>(TEXT("InteractionComp"));
+	Inventory = CreateDefaultSubobject<UCSInventoryComponent>(TEXT("InventoryComp"));
 }
 
 void AdoorsCharacter::BeginPlay()

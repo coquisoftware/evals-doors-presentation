@@ -27,7 +27,11 @@ void UCSKeyItemAccessRequirementComponent::BeginPlay()
 
 	if(AdoorsCharacter* DoorsCharacter = Cast<AdoorsCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter()))
 	{
-		DoorsCharacter->GetInventory()->OnInventoryItemAdded.AddDynamic(this, &UCSKeyItemAccessRequirementComponent::OnInventoryItemAdd);
+		if(UCSInventoryComponent* DoorsCharacterInventory = DoorsCharacter->GetInventory())
+		{
+			DoorsCharacterInventory->OnInventoryItemAdded.AddDynamic(this, &UCSKeyItemAccessRequirementComponent::OnInventoryItemAdd);
+		}
+		
 	}
 	
 }
