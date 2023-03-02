@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CSInteractableInterface.h"
+#include "CSKeyInventoryItem.h"
 #include "GameFramework/Actor.h"
 #include "CSDoor.generated.h"
 
@@ -11,12 +12,13 @@ class UCSAccessRequirementComponent;
 class ACSTriggerBox;
 
 
-// UENUM(BlueprintType)
-// enum EDoorUnlockBehavior : uint8
-// {
-// 	AutoOpen,
-// 	OpenUponInteract	
-// };
+UENUM(BlueprintType)
+enum EDoorUnlockBehavior : int
+{
+	AutoOpenUponUnlock,
+	OpenUponProximity,
+	OpenUponInteract,
+};
 
 
 UCLASS()
@@ -61,6 +63,27 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	FText DoorLabel;
+
+
+	// None of these properties below are implemented, just laying out flags design would like to see for feedback
+	UPROPERTY(EditAnywhere, Category=DoorConfig)
+	TEnumAsByte<EDoorUnlockBehavior> DoorUnlockOpenBehavior;
+
+	UPROPERTY(EditAnywhere, Category=DoorConfig)
+	bool bRequireInventoryItem;
+
+	UPROPERTY(EditAnywhere, Category=DoorConfig, meta=(EditCondition="bRequireInventoryItem"))
+	TMap< TSubclassOf<ACSKeyInventoryItem> , int > RequiredInventoryItems; 
+
+	UPROPERTY(EditAnywhere, Category=DoorConfig)
+	bool bAutoClose;
+
+	UPROPERTY(EditAnywhere, Category=DoorConfig, meta=(EditCondition="bAutoClose"))
+	float AutoCloseTimeDuration;
+
+	
+	
+
 	
 protected:
 	
