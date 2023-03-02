@@ -4,6 +4,8 @@
 #include "CSKeyInventoryItem.h"
 
 #include "CSTriggerBox.h"
+#include "CSAccessRequirementComponent.h"
+#include "CSInteractAccessRequirementComponent.h"
 
 
 // Sets default values
@@ -12,10 +14,18 @@ ACSKeyInventoryItem::ACSKeyInventoryItem()
 	
 }
 
+// Called when the game starts or when spawned
+void ACSKeyInventoryItem::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GetComponents(CachedAccessRequirementComponentsList);
+	
+}
+
 void ACSKeyInventoryItem::Interact(AdoorsCharacter* InstigatorPawn)
 {
-	
-	
+	ICSInteractableInterface::Interact(InstigatorPawn);
 }
 
 ACSTriggerBox* ACSKeyInventoryItem::GetTriggerBoxVolume()
@@ -29,7 +39,8 @@ ACSTriggerBox* ACSKeyInventoryItem::GetTriggerBoxVolume()
 		{
 			for(AActor* Child : ChildActors)
 			{
-				if(TriggerBoxVolume = Cast<ACSTriggerBox>(Child))
+				TriggerBoxVolume = Cast<ACSTriggerBox>(Child);
+				if(TriggerBoxVolume != nullptr)
 				{
 					break;
 				}
@@ -42,10 +53,5 @@ ACSTriggerBox* ACSKeyInventoryItem::GetTriggerBoxVolume()
 	return TriggerBoxVolume;
 }
 
-// Called when the game starts or when spawned
-void ACSKeyInventoryItem::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
+
 

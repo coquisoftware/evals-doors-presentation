@@ -30,7 +30,7 @@ public:
 	UFUNCTION()
 	virtual void Interact(AdoorsCharacter* InstigatorPawn);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	virtual ACSTriggerBox* GetTriggerBoxVolume();
 
 protected:

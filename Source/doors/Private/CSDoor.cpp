@@ -47,7 +47,8 @@ ACSTriggerBox* ACSDoor::GetTriggerBoxVolume()
 		{
 			for(AActor* Child : ChildActors)
 			{
-				if(TriggerBoxVolume = Cast<ACSTriggerBox>(Child))
+				TriggerBoxVolume = Cast<ACSTriggerBox>(Child);
+				if(TriggerBoxVolume != nullptr)
 				{
 					break;
 				}
