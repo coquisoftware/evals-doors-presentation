@@ -22,6 +22,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetInteractStatus(bool bStatus);
 
+	UFUNCTION(BlueprintCallable)
+	void ToggleInteractStatus();
+
 	virtual void OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor) override;
 
 	virtual void OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor) override;

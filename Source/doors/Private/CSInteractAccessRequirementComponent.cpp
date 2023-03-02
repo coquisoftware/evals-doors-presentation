@@ -3,6 +3,7 @@
 
 #include "CSInteractAccessRequirementComponent.h"
 #include "CSCharacterInteractionComponent.h"
+#include "CSInteractableInterface.h"
 #include "doorsCharacter.h"
 
 
@@ -31,15 +32,25 @@ void UCSInteractAccessRequirementComponent::SetInteractStatus(bool bStatus)
 	CheckAndNotifyAccessRequirementStatusChange();
 }
 
+void UCSInteractAccessRequirementComponent::ToggleInteractStatus()
+{
+	bHasBeenInteractedWith = !bHasBeenInteractedWith;
+	CheckAndNotifyAccessRequirementStatusChange();
+}
+
+
 void UCSInteractAccessRequirementComponent::OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
+	bHasBeenInteractedWith = false;
 	Super::OnActorBeginOverlap(OverlappedActor, OtherActor);
 
 	if(AdoorsCharacter* DoorsChar = Cast<AdoorsCharacter>(OtherActor))
 	{
 		if(UCSCharacterInteractionComponent* DoorsCharInteractionComp = DoorsChar->GetInteractionComponent())
 		{
-			DoorsCharInteractionComp->SetInstigatingActor(OtherActor);
+			AActor* Door = OverlappedActor->GetAttachParentActor();
+			check(Door && Door->Implements<UCSInteractableInterface>())
+			DoorsCharInteractionComp->SetInstigatingActor(Door);
 		}
 	}
 }

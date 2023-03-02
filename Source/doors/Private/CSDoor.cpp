@@ -58,7 +58,7 @@ void ACSDoor::Interact(AdoorsCharacter* InstigatorPawn)
 	{
 		if(UCSInteractAccessRequirementComponent* ARInteractComponent = Cast<UCSInteractAccessRequirementComponent>(ARComponent))
 		{
-			ARInteractComponent->SetInteractStatus(true);
+			ARInteractComponent->ToggleInteractStatus();
 		}
 	}
 }
