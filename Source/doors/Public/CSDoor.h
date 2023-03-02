@@ -36,7 +36,7 @@ public:
 	FText GetDoorLabel() const;
 
 	UFUNCTION(BlueprintCallable)
-	ACSTriggerBox* GetTriggerBoxVolume();
+	virtual ACSTriggerBox* GetTriggerBoxVolume() override;
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void Open();
@@ -67,12 +67,11 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsDoorOpen;
 
-	UPROPERTY(BlueprintReadOnly)
-	ACSTriggerBox* TriggerBoxVolume; 
+	
 
 private:
 
-	TArray<UCSAccessRequirementComponent*> CachedAccessRequirementComponentsList;
+	
 	
 };
 

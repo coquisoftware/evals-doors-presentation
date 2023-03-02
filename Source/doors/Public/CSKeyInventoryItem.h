@@ -19,6 +19,9 @@ public:
 	UFUNCTION()
 	virtual void Interact(AdoorsCharacter* InstigatorPawn);
 
+	UFUNCTION(BlueprintCallable)
+	virtual ACSTriggerBox* GetTriggerBoxVolume() override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

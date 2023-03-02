@@ -45,7 +45,15 @@ ACSTriggerBox* ACSDoor::GetTriggerBoxVolume()
 
 		if(!ChildActors.IsEmpty())
 		{
-			TriggerBoxVolume = Cast<ACSTriggerBox>(ChildActors[0]);
+			for(AActor* Child : ChildActors)
+			{
+				if(TriggerBoxVolume = Cast<ACSTriggerBox>(Child))
+				{
+					break;
+				}
+				
+			}
+			
 		}
 	}
 
@@ -54,13 +62,7 @@ ACSTriggerBox* ACSDoor::GetTriggerBoxVolume()
 
 void ACSDoor::Interact(AdoorsCharacter* InstigatorPawn)
 {
-	for(UCSAccessRequirementComponent* ARComponent : CachedAccessRequirementComponentsList)
-	{
-		if(UCSInteractAccessRequirementComponent* ARInteractComponent = Cast<UCSInteractAccessRequirementComponent>(ARComponent))
-		{
-			ARInteractComponent->ToggleInteractStatus();
-		}
-	}
+	ICSInteractableInterface::Interact(InstigatorPawn);
 }
 
 // Called when the game starts or when spawned

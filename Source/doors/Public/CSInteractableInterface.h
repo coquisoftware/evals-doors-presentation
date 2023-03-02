@@ -7,6 +7,9 @@
 #include "CSInteractableInterface.generated.h"
 
 class AdoorsCharacter;
+class ACSTriggerBox;
+class UCSAccessRequirementComponent;
+
 // This class does not need to be modified.
 UINTERFACE()
 class UCSInteractableInterface : public UInterface
@@ -25,5 +28,15 @@ class DOORS_API ICSInteractableInterface
 public:
 
 	UFUNCTION()
-	virtual void Interact(AdoorsCharacter* InstigatorPawn) = 0;
+	virtual void Interact(AdoorsCharacter* InstigatorPawn);
+
+	UFUNCTION(BlueprintCallable)
+	virtual ACSTriggerBox* GetTriggerBoxVolume();
+
+protected:
+	
+	UPROPERTY(BlueprintReadOnly)
+	ACSTriggerBox* TriggerBoxVolume;
+
+	TArray<UCSAccessRequirementComponent*> CachedAccessRequirementComponentsList;
 };
