@@ -6,7 +6,7 @@
 #include "UObject/Interface.h"
 #include "CSInteractableInterface.generated.h"
 
-class APawn;
+class AdoorsCharacter;
 // This class does not need to be modified.
 UINTERFACE()
 class UCSInteractableInterface : public UInterface
@@ -25,5 +25,5 @@ class DOORS_API ICSInteractableInterface
 public:
 
 	UFUNCTION()
-	virtual void Interact(APawn* InstigatorPawn);
+	void Interact(AdoorsCharacter* InstigatorPawn);
 };

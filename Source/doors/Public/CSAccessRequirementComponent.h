@@ -19,7 +19,7 @@ public:
 
 	virtual bool HasRequirementBeenMet() const PURE_VIRTUAL(, return false;);
 
-	void CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus);
+	void CheckAndNotifyAccessRequirementStatusChange();
 
 protected:
 	// Called when the game starts
@@ -28,5 +28,9 @@ protected:
 public:
 
 	FOnAccessRequirementStatusChange OnAccessRequirementStatusChange;
+
+private:
+
+	bool bCachedRequirementMet;
 	
 };

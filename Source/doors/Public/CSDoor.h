@@ -45,7 +45,7 @@ public:
 	void Close();
 
 	UFUNCTION()
-	void Interact(APawn* InstigatorPawn);
+	void Interact(AdoorsCharacter* InstigatorPawn);
 	
 protected:
 	// Called when the game starts or when spawned

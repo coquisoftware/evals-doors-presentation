@@ -3,11 +3,14 @@
 
 #include "CSCharacterInteractionComponent.h"
 
+#include "CSInteractableInterface.h"
+#include "doorsCharacter.h"
+
 
 // Sets default values for this component's properties
 UCSCharacterInteractionComponent::UCSCharacterInteractionComponent()
 {
-	// ...
+	InterfacableActor = nullptr;
 }
 
 
@@ -23,7 +26,16 @@ void UCSCharacterInteractionComponent::BeginPlay()
 
 void UCSCharacterInteractionComponent::Interact()
 {
-	
+	if(InterfacableActor != nullptr && InterfacableActor->Implements<UCSInteractableInterface>())
+	{
+		AdoorsCharacter* DoorsCharacter = Cast<AdoorsCharacter>(GetOwner());
+
+		if(ICSInteractableInterface* Interface = Cast<ICSInteractableInterface>(InterfacableActor))
+		{
+			Interface->Interact(DoorsCharacter);
+		}
+		
+	}
 }
 
 

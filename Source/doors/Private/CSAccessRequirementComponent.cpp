@@ -13,11 +13,13 @@ UCSAccessRequirementComponent::UCSAccessRequirementComponent()
 }
 
 
-void UCSAccessRequirementComponent::CheckAndNotifyAccessRequirementStatusChange(bool bNewStatus)
+void UCSAccessRequirementComponent::CheckAndNotifyAccessRequirementStatusChange()
 {
-	if(bNewStatus != HasRequirementBeenMet())
+	const bool bHasRequirementNowBeenMet = HasRequirementBeenMet();
+	if(bHasRequirementNowBeenMet != bCachedRequirementMet)
 	{
-		OnAccessRequirementStatusChange.Broadcast(bNewStatus);
+		OnAccessRequirementStatusChange.Broadcast(bHasRequirementNowBeenMet);
+		bCachedRequirementMet = bHasRequirementNowBeenMet;
 	}
 }
 

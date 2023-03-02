@@ -42,16 +42,15 @@ void UCSProximityAccessRequirementComponent::BeginPlay()
 void UCSProximityAccessRequirementComponent::OnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	// @TODO Check if OtherActor is PlayerCharacter
-	CheckAndNotifyAccessRequirementStatusChange(true);
 	bIsCharacterInTriggerVolume = true;
-	
+	CheckAndNotifyAccessRequirementStatusChange();
 }
 
 void UCSProximityAccessRequirementComponent::OnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	// @TODO Check if OtherActor is PlayerCharacter
-	CheckAndNotifyAccessRequirementStatusChange(false);
 	bIsCharacterInTriggerVolume = false;
+	CheckAndNotifyAccessRequirementStatusChange();
 }
 
 

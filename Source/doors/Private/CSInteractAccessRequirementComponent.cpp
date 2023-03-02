@@ -24,6 +24,6 @@ bool UCSInteractAccessRequirementComponent::HasRequirementBeenMet() const
 
 void UCSInteractAccessRequirementComponent::SetInteractStatus(bool bStatus)
 {
-	CheckAndNotifyAccessRequirementStatusChange(bStatus);
 	bHasBeenInteractedWith = bStatus;
+	CheckAndNotifyAccessRequirementStatusChange();
 }

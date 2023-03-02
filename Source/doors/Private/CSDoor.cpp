@@ -4,6 +4,7 @@
 #include "doors/Public/CSDoor.h"
 
 #include "CSAccessRequirementComponent.h"
+#include "CSInteractAccessRequirementComponent.h"
 #include "CSTriggerBox.h"
 
 
@@ -51,9 +52,15 @@ ACSTriggerBox* ACSDoor::GetTriggerBoxVolume()
 	return TriggerBoxVolume;
 }
 
-void ACSDoor::Interact(APawn* InstigatorPawn)
+void ACSDoor::Interact(AdoorsCharacter* InstigatorPawn)
 {
-	
+	for(UCSAccessRequirementComponent* ARComponent : CachedAccessRequirementComponentsList)
+	{
+		if(UCSInteractAccessRequirementComponent* ARInteractComponent = Cast<UCSInteractAccessRequirementComponent>(ARComponent))
+		{
+			ARInteractComponent->SetInteractStatus(true);
+		}
+	}
 }
 
 // Called when the game starts or when spawned
