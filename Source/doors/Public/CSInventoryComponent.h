@@ -8,6 +8,8 @@
 
 class ACSKeyInventoryItem;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryListUpdate, ACSKeyInventoryItem*, Item);
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class DOORS_API UCSInventoryComponent : public UActorComponent
 {
@@ -16,17 +18,19 @@ class DOORS_API UCSInventoryComponent : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UCSInventoryComponent();
-	
+
+	// Simply adds the provided item to the list
 	void AddToInventory(ACSKeyInventoryItem* Item);
 
-	
-	
+	// Delegate for notifying item added to the ist
+	FOnInventoryListUpdate OnInventoryItemAdded;
+
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	
+	// Player inventory list
 	TArray<ACSKeyInventoryItem*> InventoryItemList;
 
 };

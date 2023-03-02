@@ -6,6 +6,7 @@
 #include "CSAccessRequirementComponent.h"
 #include "CSKeyItemAccessRequirementComponent.generated.h"
 
+class ACSKeyInventoryItem;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class DOORS_API UCSKeyItemAccessRequirementComponent : public UCSAccessRequirementComponent
@@ -16,8 +17,16 @@ public:
 	// Sets default values for this component's properties
 	UCSKeyItemAccessRequirementComponent();
 
+	virtual bool HasRequirementBeenMet_Implementation() const override;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	void OnInventoryItemAdd(ACSKeyInventoryItem* Item);
+
+private:
+
+	bool bPlayerHasKeyItem;
 
 };

@@ -6,6 +6,8 @@
 #include "CSTriggerBox.h"
 #include "CSAccessRequirementComponent.h"
 #include "CSInteractAccessRequirementComponent.h"
+#include "CSInventoryComponent.h"
+#include "doorsCharacter.h"
 
 
 // Sets default values
@@ -26,6 +28,21 @@ void ACSKeyInventoryItem::BeginPlay()
 void ACSKeyInventoryItem::Interact(AdoorsCharacter* InstigatorPawn)
 {
 	ICSInteractableInterface::Interact(InstigatorPawn);
+
+	// Hide actor
+	SetActorHiddenInGame(true);
+	SetActorEnableCollision(false);
+	SetActorTickEnabled(false);
+
+	// Add to player inventory
+	if(InstigatorPawn != nullptr)
+	{
+		if(UCSInventoryComponent* PlayerInventory = InstigatorPawn->GetInventory())
+		{
+			PlayerInventory->AddToInventory(this);
+		}
+	}
+	
 }
 
 ACSTriggerBox* ACSKeyInventoryItem::GetTriggerBoxVolume()

@@ -14,6 +14,7 @@ UCSInventoryComponent::UCSInventoryComponent()
 void UCSInventoryComponent::AddToInventory(ACSKeyInventoryItem* Item)
 {
 	InventoryItemList.Push(Item);
+	OnInventoryItemAdded.Broadcast(Item);
 }
 
 
